@@ -1,0 +1,21 @@
+/* habría que modificarlo para ponerlo bonito*/
+html{
+	font-family: Brush Script MT, Brush Script Std, cursive;
+	color:#79522B;
+	background-color:#FFF1E3;
+}
+div.header{
+	background-color:#FDDCBC;
+	
+	border: outset 4px #79522B;
+}
+
+div.header div.up_header{
+	font-size:100px;
+	font-weight:bold;
+
+}
+
+div.header div.low_header{
+	
+}

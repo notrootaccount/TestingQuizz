@@ -1,0 +1,39 @@
+<html>
+<!-- hay que modificar mucho el html para que quede bonito -->
+    <head>
+        <title>Test S.U.R.V.I.V.E.</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+		<!-- Para poder poner el css, tenemos que colocarlo en la carpeta STATIC -->
+    </head>
+    <body>
+		<!-- las clases las definiremos en el css -->
+        <div class="header">
+			<div class="up_header">S.U.R.V.I.V.E.</div>
+			<div class="low_header">Sistema Unico y Real de Valoración de Inquietudes Vitales y Existenciales</div>
+		</div>
+		
+				<!-- la variables request.url tiene la url de la página, con ella podremos generar direcciones sin necesidad de incluir las posiciones relativas con . o .. -->
+<form action="{{ request.url }}resultado" method="post">
+
+<div class="group_questions">
+	<!-- con jinja2 se crean las marcas estas que no son python pero sirven para introducir los valores, las variables están definidas en el python routes-->
+    {% for qu in questions %}
+	<div class="question">
+        <p><label>{{qu.pregunta}}: </label>
+		
+		{% for ans in qu.respuestas %}
+		<p>  <input type="radio" name="{{qu.idq}}" value="{{ans.value}}"> - {{ans.texto}} 
+		{% endfor %}
+	</div>
+</div>
+
+
+    {% endfor %}
+
+
+<div class="submit"><input type="submit" value="¡He acabado!"><div>
+</form>
+    </body>
+
+	
+</html>
