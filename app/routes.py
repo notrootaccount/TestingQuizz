@@ -1,10 +1,11 @@
 from flask import render_template, request, redirect
-from app import app
+from app import app, preguntas, descriptions
+
 ###################             Nuestras variables          #############################
 #en el modulo inform tengo los datos, en un futuro debería sacarlos de una base de datos#
 #########################################################################################
 from app import inform
-global preguntas, clases
+global clases
 #       sería interesante buscar como hacer
 #       para que no sean globales y solo los utilice el modulo que toca#
 #########################################################################################
@@ -32,10 +33,10 @@ global preguntas, clases
 ###################                   Página INDEX           ############################
 #########################################################################################
 def index():
-    #Ejecuta el codigo python que sea, en este caso defino una variable "preguntas" con la
-    # variable global que había antes
-	preguntas=inform.preguntas
-	return render_template('index.html', questions=preguntas)
+    # La variable "preguntas" es global, por lo que ya está definida cuando iniciamos flask.
+    # la variable preguntas se asigna a questions que se utilizará en el template
+
+    return render_template('index.html', questions=preguntas)
     #en el return le ponemos lo que queremos que devuelva, en este caso devuelve la plantilla que haya en "index.html" 
     # dentro de la carpeta templates. Además hay que asignarle las variables que se utilicen en el jinja
     # de la plantilla que devolverá, en este caso a la variable "questions" del html le he asignado 
@@ -53,7 +54,7 @@ def resultado():
     results_list_all = []
     results_list_counted = {}
 
-    for question in inform.preguntas:
+    for question in preguntas:
        results_list_all.append(request.form.get(question.get('idq')))
        
     #hace una lista de las respuestas que se han enviado
@@ -80,12 +81,16 @@ def resultado():
     
     
     ###############################ALGORITMO DE DECISIÓN DE CLASE #################################
-    result_max=max(results_list_counted.values())
-    for value in results_list_counted.keys():
-        if results_list_counted.get(value)==result_max:
-            clase=value
-            break
-    descripcion=inform.clases.get(clase)
+    if len(results_list_counted) == 0:
+        clase="No definido"
+        descripcion = "Respuestas no pueden definir ninguna clase"
+    else:
+        result_max=max(results_list_counted.values())
+        for value in results_list_counted.keys():
+            if results_list_counted.get(value)==result_max:
+                clase=value
+                break
+        descripcion=descriptions.get(clase)
 
     ###############################################################################################
     return render_template('resultado.html', clase=clase,descripcion=descripcion)

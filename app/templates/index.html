@@ -19,10 +19,10 @@
 	<!-- con jinja2 se crean las marcas estas que no son python pero sirven para introducir los valores, las variables están definidas en el python routes-->
     {% for qu in questions %}
 	<div class="question">
-        <p><label>{{qu.pregunta}}: </label>
-		
-		{% for ans in qu.respuestas %}
-		<p>  <input type="radio" name="{{qu.idq}}" value="{{ans.value}}"> - {{ans.texto}} 
+        <p><label>{{qu.question}}: </label>
+
+		{% for r_ans in qu.ans %}
+		<p>  <input type="radio" name="{{qu.idq}}" value="{{r_ans.value}}"> - {{r_ans.text}}
 		{% endfor %}
 	</div>
 </div>
