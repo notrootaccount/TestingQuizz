@@ -1,21 +1,65 @@
-/* habría que modificarlo para ponerlo bonito*/
-html{
-	font-family: Brush Script MT, Brush Script Std, cursive;
-	color:#79522B;
-	background-color:#FFF1E3;
-}
-div.header{
-	background-color:#FDDCBC;
-	
-	border: outset 4px #79522B;
-}
+html, body { 	background-color:#EECBA7; font-family: MedievalSharp;  }
+h1.tittle{
+font-size:clamp(8vw,15vh,12vw);
+height:15vh;
 
-div.header div.up_header{
-	font-size:100px;
+}
+p.tittle{
+margin:0px;
+font-size:2vh;
+height:10vh;
+
+}
+label, p {
+font-family: MedievalSharp; }
+div.container-fluid h1{
 	font-weight:bold;
+	font-family: MedievalSharp;
+}
+
+div.group_questions{
+background-color:#DBB997;
+
+}
+div.question{
+padding-left:10%;
+padding-right:10%;
+}
+div.question label.q{
+	font-size:200%;
+	font-weight:bold;
+}
+label.answer{
+	margin:2px;
+	width:100%;
+	padding:5px;
+}
+label.answer:hover{
+	color:#EECBA7;
+	background-color:#5B4733;
 
 }
 
-div.header div.low_header{
-	
+.button{
+font-family: MedievalSharp;
+font-size:3em;
+color:#F9856C;
+background-color:#5B4733;
+
+}
+
+.button:hover{
+font-size:4em;
+background-color:#EECBA7;
+border: 5px solid #5B4733;
+border-radius:10px;
+color:#5B4733;
+font-weight:bold;
+}
+input.rinput{
+display:none;
+}
+input.rinput:checked + label {
+background-color:#35291D;
+color:#EECBA7;
 }

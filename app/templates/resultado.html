@@ -1,10 +1,18 @@
 <html>
     <head>
         <title>Resultados</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=MedievalSharp" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
-    <body>
-        <h1>¡Has acabado el examen!</h1>
-<p> Consideramos que la mejor clase para ti es:<b> {{clase}}</b> </p>
-<p> {{descripcion}}</p>
-	
+
+    <body style="background-image:url({{ url_for('static', filename='pics/'+clase+'.jpg' ) }});background-repeat:no-repeat;background-size:30% 70%;background-position:bottom right;">
+        <h1 class="display-1" style="font-family:MedievalSharp;font-weight:bold;margin:5px;">¡Has acabado el examen!</h1>
+        <p class="display-4" style="font-family:MedievalSharp;" > Consideramos que la mejor clase para ti es: </p>
+        <p class="display-2" style="font-family:MedievalSharp;margin-left:20%;color:{{color}};width;40%;"> {{clase}}</p>
+        <p style="font-family:MedievalSharp;margin-left:30%;"> {{descripcion}}</p>
 </html>

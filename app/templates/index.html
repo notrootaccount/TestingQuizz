@@ -1,39 +1,94 @@
-<html>
-<!-- hay que modificar mucho el html para que quede bonito -->
-    <head>
-        <title>Test S.U.R.V.I.V.E.</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-		<!-- Para poder poner el css, tenemos que colocarlo en la carpeta STATIC -->
-    </head>
-    <body>
-		<!-- las clases las definiremos en el css -->
-        <div class="header">
-			<div class="up_header">S.U.R.V.I.V.E.</div>
-			<div class="low_header">Sistema Unico y Real de Valoración de Inquietudes Vitales y Existenciales</div>
-		</div>
-		
-				<!-- la variables request.url tiene la url de la página, con ella podremos generar direcciones sin necesidad de incluir las posiciones relativas con . o .. -->
-<form action="{{ request.url }}resultado" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>S.U.R.V.I.V.E Test</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=MedievalSharp" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+</head>
+<body>
+<div class="container-fluid" style="height:25vh;background-color:#EECBA7;color:#5B4733;text-align:center;">
 
-<div class="group_questions">
-	<!-- con jinja2 se crean las marcas estas que no son python pero sirven para introducir los valores, las variables están definidas en el python routes-->
-    {% for qu in questions %}
-	<div class="question">
-        <p><label>{{qu.question}}: </label>
-
-		{% for r_ans in qu.ans %}
-		<p>  <input type="radio" name="{{qu.idq}}" value="{{r_ans.value}}"> - {{r_ans.text}}
-		{% endfor %}
+	  <h1 class="tittle">S.U.R.V.I.V.E.</h1>
+	  <p class="tittle">Sistema de unificación verificada de inquietudes valoradas exactamente</p>
 	</div>
-</div>
+
+ <form action="{{ request.url }}resultado" style="background-color:#EECBA7;height:75vh;width:100%;"method="post">
+	<div id="QUIZZ" class="carousel slide" style="background-color:#EECBA7;height:60vh;overflow-x:hidden;overflow-y:auto;" data-interval="false" data-ride="carousel">
+
+	  <!-- Indicators -->
+	  <ul class="carousel-indicators">
+
+		{% for qu in questions %}
+		  {% if loop.index-1 == 0 %}
+		  <li data-target="#QUIZZ" data-slide-to="{{loop.index-1}}" class="active"></li>
+		  {% else %}
+		  <li data-target="#QUIZZ" data-slide-to="{{loop.index-1}}"></li>
+		  {% endif %}
 
 
-    {% endfor %}
+		{% endfor %}
+
+	  </ul>
+
+	  <!-- The slideshow -->
+
+	  <div class="carousel-inner">
+
+		 {% for qu in questions %}
+
+		  {% if loop.index - 1 == 0 %}
 
 
-<div class="submit"><input type="submit" value="¡He acabado!"><div>
+		 	 <div class="carousel-item active">
+			  <div class="question">
+								<label class="q"> {{qu.question}} </label>
+
+								{% for answer in qu.ans %}
+									<input type="radio" class="rinput" name="{{qu.idq}}" id="{{answer.value}}{{qu.idq}}" value="{{answer.value}}"> <label class="answer" for="{{answer.value}}{{qu.idq}}">     {{answer.text}}</label>
+								{% endfor %}
+			</div>
+			</div>
+
+		  	{% else %}
+		<div class="carousel-item">
+			  <div class="question">
+								<label class="q"> {{qu.question}} </label>
+
+								{% for answer in qu.ans %}
+				<input type="radio" class="rinput" name="{{qu.idq}}" id="{{answer.value}}{{qu.idq}}" value="{{answer.value}}"> <label class="answer" for="{{answer.value}}{{qu.idq}}">    {{answer.text}} </label>
+								{% endfor %}
+
+			  </div>
+			</div>
+
+		  	{% endif %}
+
+		  {% endfor %}
+
+
+
+
+
+	  </div>
+
+	  <!-- Left and right controls -->
+	  <a class="carousel-control-prev" href="#QUIZZ" data-slide="prev">
+		<span class="carousel-control-prev-icon"></span>
+	  </a>
+	  <a class="carousel-control-next" href="#QUIZZ" data-slide="next">
+		<span class="carousel-control-next-icon"></span>
+	  </a>
+
+	</div>
+	<input type="submit" class="button" style="height:15vh;width:100%;">
 </form>
-    </body>
 
-	
+</body>
 </html>
