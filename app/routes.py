@@ -90,30 +90,10 @@ def resultado():
             if results_list_counted.get(value)==result_max:
                 clase=value
                 break
-        descripcion=descriptions.get(clase)
 
-    if clase == 'fighter':
-        color='#6E5841'
-    elif clase == 'bard':
-        color='#C94DDA'
-    elif clase == 'barbarian':
-        color = '#B43327'
-    elif clase == 'druid':
-        color = '#4AB427'
-    elif clase == 'wizard':
-        color ='#2771B4'
-    elif clase == 'rogue':
-        color = '#434C54'
-    elif clase == 'cleric':
-        color = '#B4AF27'
-    elif clase == 'monk':
-        color = '#C8CA65'
-    elif clase == 'sorcerer':
-        color = '#F96226'
-    else:
-        color = 'black'
+
 
     ###############################################################################################
-    return render_template('resultado.html', clase=clase,descripcion=descripcion,color=color)
+    return render_template('resultado.html', clase=clase,apiurl="http://127.0.0.1:5050")
 
 #########################################################################################

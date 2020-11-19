@@ -10,10 +10,57 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
 
-    <body style="background-image:url({{ url_for('static', filename='pics/'+clase+'.jpg' ) }});background-repeat:no-repeat;background-size:30% 70%;background-position:bottom right;">
-        <h1 class="display-1" style="font-family:MedievalSharp;font-weight:bold;margin:5px;">¡Has acabado el examen!</h1>
-        <p class="display-4" style="font-family:MedievalSharp;" > Consideramos que la mejor clase para ti es: </p>
-        <p class="display-2" style="font-family:MedievalSharp;margin-left:20%;color:{{color}};width;40%;"> {{clase}}</p>
-        <p style="font-family:MedievalSharp;margin-left:30%;"> {{descripcion}}</p>
+
+    <body id="body" style="">
+		ApiFailure
+
+		
+		
+
+
     </body>
+	<script>	 
+	function updateContent(classe,color,description){
+		/* 	var pclass = document.getElementById("class");
+				 var pclassstyle = pclass.getAttribute("style") + "color:"+color+";";
+				 var pdesc = document.getElementById("description");
+				 var body = document.getElementById("body"); */
+				document.getElementById("body").innerHTML = '<h1 class="display-1" style="font-family:MedievalSharp;font-weight:bold;margin:5px;">¡Has acabado el examen!</h1>'+
+        '<p class="display-4" style="font-family:MedievalSharp;" > Consideramos que la mejor clase para ti es: </p>'+
+        '<p class="display-2" id="class" style="font-family:MedievalSharp;margin-left:20%;width;40%;color:'+color+';">'+ classe +'</p>'+
+        '<p style="font-family:MedievalSharp;margin-left:30%;" id="description">'+description+ '</p>';
+			
+				 document.getElementById("body").setAttribute("style","background-image:url('{{ url_for("static", filename="pics/"+clase+".jpg" ) }}');background-repeat:no-repeat;background-position:bottom right;height:99vh;background-size:30% 50%;");
+				/*	 pclass.innerHTML = classe;
+				 pdesc.innerHTML = description;
+				 pclass.setAttribute("style",pclassstyle);
+				 */
+				 }
+	</script>	
+	<script>		
+
+		
+		var url = '{{ apiurl }}/api/result/{{clase}}'
+		
+		var ClassResult = "";
+		updateDisplay('');	
+		
+		function updateDisplay(verse) {
+			let request = new XMLHttpRequest();
+			request.open('GET', url);
+			request.responseType = 'text';
+			
+			request.onload = function() {
+				content = JSON.parse(request.response);
+				updateContent(content["classe"],content["color"],content["description"]);
+			};
+	
+			request.send();
+		}
+
+
+</script>
+	
+
+				
 </html>
